@@ -4,7 +4,7 @@
 \alias{AjustarRegressao}
 \title{Ajuste de modelos de regressao multipla}
 \usage{
-AjustarRegressao(Dados,design,verbose=TRUE)
+AjustarRegressao(Dados, design,Modelos=NULL)
 }
 \arguments{
 \item{Dados}{Matriz contendo 3 colunas obrigatoriamente caso o design seja
@@ -21,16 +21,16 @@ repeticoes/blocos e a quarta coluna com a variavel resposta.}
 \item design 3 -> Experimento no delineamento em blocos casualizados (Dbc).
   }}
 
-\item{verbose}{Valor logico (TRUE ou FALSE) indicando se os resultados devem
-ou nao serem apresentados no console.}
+\item{Modelos}{Objeto do tipo list com os objetos a serem testados. Se NULL
+(default) sao testados 12 modelos de regressao.}
 }
 \value{
-A funcao retorna o resultado do ajuste de 12 modelos de regressao.
+A funcao retorna o resultado do ajuste de modelos de regressao.
 Estes resultados podem ser apresentados no console, e alem disso, estao
 carregados em um objeto do tipo list.
 }
 \description{
-Esta funcao realiza o ajuste de 12 modelos de regressao multipla
+Esta funcao realiza o ajuste de  modelos de regressao multipla
   considerando 2 variaveis independentes (explicativas) e uma variavel
   dependente (resposta). E possivel analisar dados de experimentos avaliados
   sem delineamento (repeticoes) e com delineamento estatistico (DIC e DBC)
@@ -38,7 +38,8 @@ Esta funcao realiza o ajuste de 12 modelos de regressao multipla
 \examples{
 #Exemplo 1: Experimento sem delineamento
 data("Dados1")
-res=AjustarRegressao(Dados = Dados1, design=1,verbose=FALSE)
+res=AjustarRegressao(Dados = Dados1, design=1)
+res
 plot2D(res,niveis = 3)
 plot2D(res,niveis = 3,xlab="Comprimento (cm)",ylab="Largura (cm)",
        Metodo = "simple")
@@ -71,7 +72,8 @@ plot2D(res,niveis = 10,xlab="Comprimento (cm)",ylab="Largura (cm)",zlab=FALSE,
 ##############################################################################
 #Exemplo 2: Experimento sem delineamento
 data("Dados2")
-res=AjustarRegressao(Dados = Dados2, design=1,verbose=TRUE)
+res=AjustarRegressao(Dados = Dados2, design=1)
+res
 plot2D(res,niveis = 10,xlab="Acucar (\%)",ylab="Banana (\%)",
 zlab="Aceitabilidade",
       contour = TRUE,cor=col1(200),box=TRUE,col.contour = "black",
@@ -82,15 +84,17 @@ plot3D(res)
 ##############################################################################
 #Exemplo 3: Experimento com delineamento (DIC)
 data("Dados3")
-res=AjustarRegressao(Dados = Dados3, design=2,verbose=TRUE)
+res=AjustarRegressao(Dados = Dados3, design=2)
+res
 plot2D(res,niveis = 5, Metodo="edge",contour = FALSE)
 plot2D(res,niveis = 5, Metodo="edge",contour = TRUE,col.contour = "black")
-
+plot3D(res)
 ##############################################################################
 ##############################################################################
 #Exemplo 4: Experimento com delineamento (DBC)
 data("Dados3")
-res=AjustarRegressao(Dados = Dados3, design=3,verbose=TRUE)
+res=AjustarRegressao(Dados = Dados3, design=3)
+res
 plot2D(res,niveis = 20,xlab="N (K/ha)",ylab="K (Kg/ha)",
       Metodo="edge",contour = TRUE,cor=col1(200),box=TRUE)
 plot2D(res,niveis = 5, Metodo="edge",contour = TRUE,col.contour = "black")

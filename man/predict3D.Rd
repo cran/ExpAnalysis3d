@@ -4,41 +4,20 @@
 \alias{predict3D}
 \title{Funcao para obter valores para construcao de graficos de superficie resposta}
 \usage{
-predict3D(Resultado, Modelo=NULL, type=1,n=30)
+predict3D(Resultado, modelo=NULL, type=1,n=30)
 }
 \arguments{
 \item{Resultado}{:Objeto do tipo list referente ao output da funcao
 AjustarRegressao.}
 
-\item{Modelo}{:Valor numerico (inteiro) de 1 a 12 indicando o modelo de
- regressao multipla selecionado:
+\item{modelo}{Valor numerico indicando o modelo considerado na confeccao do
+grafico. Pode ser
+NULL (default) ou um valor numerico indicando o modelo a ser considerado.
 \itemize{
-\item NULL -> Considera o melhor dos 12 modelos testados de acordo com o
+\item NULL -> Considera o melhor dos  modelos testados de acordo com o
 Criterio de informatividade de Akaike (AIC)
-\item 1 -> O grafico e plotado considerando o modelo:
- Z~1+X+Y
-\item 2 -> O grafico e plotado considerando o modelo:
-Z~1+X+I(X^2)+Y
-\item 3 -> O grafico e plotado considerando o modelo:
-Z~1+X+Y+I(Y^2)
-\item 4 -> O grafico e plotado considerando o modelo:
-Z~1+X+I(X^2)+Y+I(Y^2)
-\item 5 -> O grafico e plotado considerando o modelo:
-Z~1+X+Y+X:Y
-\item 6 -> O grafico e plotado considerando o modelo:
-Z~1+X+I(X^2)+Y+X:Y
-\item 7 -> O grafico e plotado considerando o modelo:
-Z~1+X+Y+I(Y^2)+X:Y
-\item 8 -> O grafico e plotado considerando o modelo:
-Z~1+X+I(X^2)+Y+I(Y^2)+X:Y
-\item 9 -> O grafico e plotado considerando o modelo:
-Z~1+X+I(X^2)+Y+I(Y^2)+X:Y+I(X^2):Y
-\item 10 -> O grafico e plotado considerando o modelo:
-Z~1+X+I(X^2)+Y+I(Y^2)+X:Y+I(Y^2):X
-\item 11 -> O grafico e plotado considerando o modelo:
-Z~1+X+I(X^2)+Y+I(Y^2)+X:Y+I(X^2):Y+I(Y^2):X
-\item 12 -> O grafico e plotado considerando o modelo:
-Z~1+X+I(X^2)+Y+I(Y^2)+X:Y+I(X^2):Y+I(Y^2):X+I(X^2):I(Y^2))
+\item n -> considera o n-esimo modelo para plotar o grafico.
+
 }}
 
 \item{type}{:Valor de 1 a 3 indicando o output desejado pela funcao.
@@ -64,7 +43,7 @@ graficos de superficie resposta (3D).
  ############################################################################
  #Exemplo 1: Experimento sem delineamento
  data("Dados1")
- res=AjustarRegressao(Dados = Dados1, design=1,verbose=FALSE)
+ res=AjustarRegressao(Dados = Dados1, design=1)
  predict3D(Resultado = res,type =1) #matriz XYZ
  predict3D(Resultado = res,type =2) #matriz Z quadrada
  predict3D(Resultado = res,type =3) #matriz XY + Z quadrada
@@ -74,7 +53,7 @@ graficos de superficie resposta (3D).
  ############################################################################
  #Exemplo 2: Experimento sem delineamento
  data("Dados2")
- res=AjustarRegressao(Dados = Dados2, design=1,verbose=TRUE)
+ res=AjustarRegressao(Dados = Dados2, design=1)
  predict3D(Resultado = res,type =1) #matriz XYZ
  predict3D(Resultado = res,type =2) #matriz Z quadrada
  predict3D(Resultado = res,type =3) #matriz XY + Z quadrada
@@ -83,7 +62,7 @@ graficos de superficie resposta (3D).
  ############################################################################
  #Exemplo 3: Experimento com delineamento (DIC)
  data("Dados3")
- res=AjustarRegressao(Dados = Dados3, design=2,verbose=TRUE)
+ res=AjustarRegressao(Dados = Dados3, design=2)
  predict3D(Resultado = res,type =1) #matriz XYZ
  predict3D(Resultado = res,type =2) #matriz Z quadrada
  predict3D(Resultado = res,type =3) #matriz XY + Z quadrada
@@ -92,7 +71,7 @@ graficos de superficie resposta (3D).
  ############################################################################
  #Exemplo 4: Experimento com delineamento (DBC)
  data("Dados3")
- res=AjustarRegressao(Dados = Dados3, design=3,verbose=TRUE)
+ res=AjustarRegressao(Dados = Dados3, design=3)
  predict3D(Resultado = res,type =1) #matriz XYZ
  predict3D(Resultado = res,type =2) #matriz Z quadrada
  predict3D(Resultado = res,type =3) #matriz XY + Z quadrada

@@ -16,7 +16,8 @@ O experimento pode ter sido conduzido sem repeticoes, no delineamento
 inteiramente casualizado ou em bloco casualizado.
 }
 \details{
-Os 12 modelos ajustados de regressao sao:
+Os modelos podem ser alocados em um objeto do tipo list. Outra alternativa e
+considerar os 12 modelos ajustados de regressao default:
 \itemize{
 \item 1 -> Modelo:
  Z~1+X+Y

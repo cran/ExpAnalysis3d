@@ -16,39 +16,15 @@
 #'               main=NULL)
 #' @param Resultado   Objeto do tipo list contendo a saida da funcao
 #' 'AjustarRegressao'
-#' @param modelo Indica o modelo considerado na confeccao do grafico. Pode ser
-#' NULL (default) ou um valor numerico de 1 a 12:
-#  \cr
-# \if{html}{\figure{Table.jpg}{options:   height="1\%" alt="Figure: Table.jpg"}}
-# \cr
-#'  \itemize{
-#' \item NULL -> Considera o melhor dos 12 modelos testados de acordo com o
+
+#' @param modelo Valor numerico indicando o modelo considerado na confeccao do
+#' grafico. Pode ser
+#' NULL (default) ou um valor numerico indicando o modelo a ser considerado.
+#' \itemize{
+#' \item NULL -> Considera o melhor dos  modelos testados de acordo com o
 #' Criterio de informatividade de Akaike (AIC)
-#' \item 1 -> O grafico e plotado considerando o modelo:
-#'  Z~1+X+Y
-#' \item 2 -> O grafico e plotado considerando o modelo:
-#'Z~1+X+I(X^2)+Y
-#' \item 3 -> O grafico e plotado considerando o modelo:
-#'Z~1+X+Y+I(Y^2)
-#' \item 4 -> O grafico e plotado considerando o modelo:
-#'Z~1+X+I(X^2)+Y+I(Y^2)
-#' \item 5 -> O grafico e plotado considerando o modelo:
-#'Z~1+X+Y+X:Y
-#' \item 6 -> O grafico e plotado considerando o modelo:
-#'Z~1+X+I(X^2)+Y+X:Y
-#' \item 7 -> O grafico e plotado considerando o modelo:
-#'Z~1+X+Y+I(Y^2)+X:Y
-#' \item 8 -> O grafico e plotado considerando o modelo:
-#'Z~1+X+I(X^2)+Y+I(Y^2)+X:Y
-#' \item 9 -> O grafico e plotado considerando o modelo:
-#'Z~1+X+I(X^2)+Y+I(Y^2)+X:Y+I(X^2):Y
-#' \item 10 -> O grafico e plotado considerando o modelo:
-#'Z~1+X+I(X^2)+Y+I(Y^2)+X:Y+I(Y^2):X
-#' \item 11 -> O grafico e plotado considerando o modelo:
-#'Z~1+X+I(X^2)+Y+I(Y^2)+X:Y+I(X^2):Y+I(Y^2):X
-#' \item 12 -> O grafico e plotado considerando o modelo:
-#'Z~1+X+I(X^2)+Y+I(Y^2)+X:Y+I(X^2):Y+I(Y^2):X+I(X^2):I(Y^2))
-#' }
+#' \item n -> considera o n-esimo modelo para plotar o grafico.
+#'}
 #'
 #' @param cor Refere-se a paleta de cores para a construcao do grafico. Se for
 #' NULL (default) sera utilizado uma paleta de cores padrao. Se for desejavel
@@ -71,8 +47,7 @@
 #'   #Exemplo 1: Experimento sem delineamento
 #'   data("Dados1")
 #'   res=AjustarRegressao(Dados = Dados1,
-#'   design=1,
-#'   verbose=FALSE)
+#'   design=1)
 #'   plot3D(res)
 #'   ##########################
 #'   #Criando paleta de cores
@@ -95,7 +70,7 @@
 #'  ########################################################################
 #'  #Exemplo 2: Experimento sem delineamento
 #'   data("Dados2")
-#'   res=AjustarRegressao(Dados = Dados2, design=1,verbose=TRUE)
+#'   res=AjustarRegressao(Dados = Dados2, design=1)
 #'   plot3D(res,cor=col1(200),xlab="Acucar (%)",ylab="Banana (%)",
 #'   zlab="Aceitabilidade")
 #'
@@ -104,14 +79,25 @@
 #'
 #'   #Exemplo 3: Experimento com delineamento (DIC)
 #'   data("Dados3")
-#'   res=AjustarRegressao(Dados = Dados3, design=2,verbose=TRUE)
+#'   res=AjustarRegressao(Dados = Dados3, design=2)
 #'   plot3D(res,cor=col1(200),xlab="N (K/ha)",ylab="K (Kg/ha)")
 #'
 #'
 #'   #Exemplo 4: Experimento com delineamento (DBC)
 #'   data("Dados3")
-#'   res=AjustarRegressao(Dados = Dados3, design=3,verbose=TRUE)
+#'   res=AjustarRegressao(Dados = Dados3, design=3)
 #'   plot3D(res,cor=col1(200),modelo = 10,xlab="N (K/ha)",ylab="K (Kg/ha)")
+#'
+#'   #Exemplo 5: Experimento com delineamento (DBC) e modelos personalizados
+#'   data("Dados3")
+#'   Mod=list(
+#'   m1  =Z~   1 + X  + Y,
+#'   m2	=Z~	 1 + X  + I(X^2)  + Y  + I(Y^2),
+#'   m3	=Z~	 1 + X  + Y       + X:Y)
+#'   res=AjustarRegressao(Dados = Dados3, design=3,Modelos=Mod)
+#'   plot3D(res,cor=col1(200),modelo = 3,xlab="N (K/ha)",ylab="K (Kg/ha)")
+#'
+#'
 # }
 #' @export
 
@@ -120,7 +106,8 @@ plot3D=function(Resultado,modelo=NULL,cor=NULL,
 res=Resultado
   if(is.null(cor)){cor=hcl.colors(12, "YlOrRd", rev = TRUE)}
 
-  if(is.null(modelo)){modelo=res$MelhorModelo[3]}
+  if(is.null(modelo)){Modelo=res$Ajuste[[res$MelhorModelo[3]]]$Model  }
+if(is.null(modelo)==FALSE){Modelo=res$Ajuste[[modelo]]$Model  }
   if(res$Design==1){
    D=res$Dados
 
@@ -130,6 +117,6 @@ res=Resultado
    D=res$Dados[,-3]
   }
 
-Plotar3D(D,m=modelo,cor=cor,xlab=xlab,ylab=ylab,zlab=zlab,main)
+Plotar3D(D,m=Modelo,cor=cor,xlab=xlab,ylab=ylab,zlab=zlab,main)
 
 }
