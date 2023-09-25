@@ -123,11 +123,18 @@ modelos=modelos
 
 
 
-  r=function(Z,m,D){
-    X=D[,1]
-    Y=D[,2]
+  r=function(Z,m,DD){
+
+    X=DD[,1]
+    Y=DD[,2]
+    colnames(DD)[1]="X"
+    colnames(DD)[2]="Y"
+    colnames(DD)[4]="Z"
+
     model=lm(modelos[[m]],data=DD)
+
     res=summary(model)
+
     c(res$r.squared,res$adj.r.squared,AIC(model),BIC(model))
   }
   ########################################################################################

@@ -146,6 +146,7 @@ AjustarRegressao=function(Dados,design,Modelos=NULL){
   }
   ############ DBC
   if(design==3){
+
    res= AjustarRegressaoDBC(Dados,modelos)
   }
   class(res)="AjustarRegressao"

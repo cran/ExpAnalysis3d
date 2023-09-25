@@ -39,7 +39,7 @@
 #'Z~1+X+I(X^2)+Y+I(Y^2)+X:Y+I(X^2):Y+I(Y^2):X+I(X^2):I(Y^2))
 #' }
 #' @docType package
-#' @name ExpAnalysis3d package
+#' @name ExpAnalysis3d-package
 #' @aliases ExpAnalysis3d
 #' @author Alcinei Mistico Azevedo: <alcineimistico@@hotmail.com>
 #' @references

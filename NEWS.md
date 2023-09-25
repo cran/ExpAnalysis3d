@@ -1,3 +1,7 @@
+# ExpAnalysis3d 0.1.2
+## Minor improvements
+* All functions have been improved. 
+
 # ExpAnalysis3d 0.1.1
 ## Minor improvements
 * All functions have been improved. 
