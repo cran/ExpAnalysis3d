@@ -108,11 +108,11 @@
 #' @importFrom stats AIC BIC anova aov coefficients lm model.matrix pf predict pt
 #' @importFrom crayon green
 #' @importFrom magrittr `%>%`
+
+# @exportS3Method print AjustarRegressao
+
+
 #' @export
-#' @exportS3Method print AjustarRegressao
-
-
-
 AjustarRegressao=function(Dados,design,Modelos=NULL){
   modelos=Modelos
   if(is.null(Modelos)){
@@ -154,7 +154,7 @@ AjustarRegressao=function(Dados,design,Modelos=NULL){
 }
 
 
-
+#' @export
 print.AjustarRegressao=function(x,...){
 Resultado=x
 npar=nrow(Resultado$Qualidade)

@@ -4,10 +4,11 @@
 \name{ExpAnalysis3d-package}
 \alias{ExpAnalysis3d-package}
 \alias{ExpAnalysis3d}
-\title{Pacote Para Analise De Experimentos Por Regressao Multipla
+\title{Package 'ExpAnalysis3d'
+Pacote Para Analise De Experimentos Por Regressao Multipla
 e Grafico 3D
  \cr
-\if{html}{\figure{graph2.jpg}{options:   height="4\%" alt="Figure: graph2.jpg"}}}
+\if{html}{\figure{graph2.jpg}{options:   height="100" alt="Figure: graph2.jpg"}}}
 \description{
 Este pacote realiza a analise de experimentos que tenham
 duas variaveis explicativas quantitativas e uma variavel resposta

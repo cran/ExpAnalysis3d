@@ -1,3 +1,7 @@
+# ExpAnalysis3d 0.1.3
+## Minor improvements
+* Includes the suggestions given by the CRAN team.
+
 # ExpAnalysis3d 0.1.2
 ## Minor improvements
 * All functions have been improved. 

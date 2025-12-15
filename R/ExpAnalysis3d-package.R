@@ -1,7 +1,10 @@
+#' Package 'ExpAnalysis3d'
 #' Pacote Para Analise De Experimentos Por Regressao Multipla
 #' e Grafico 3D
 #'  \cr
-#' \if{html}{\figure{graph2.jpg}{options:   height="4\%" alt="Figure: graph2.jpg"}}
+#' \if{html}{\figure{graph2.jpg}{options:   height="100" alt="Figure: graph2.jpg"}}
+
+
 
 #' @description
 #' Este pacote realiza a analise de experimentos que tenham
@@ -38,8 +41,7 @@
 #' \item 12 -> Modelo:
 #'Z~1+X+I(X^2)+Y+I(Y^2)+X:Y+I(X^2):Y+I(Y^2):X+I(X^2):I(Y^2))
 #' }
-#' @docType package
-#' @name ExpAnalysis3d-package
+
 #' @aliases ExpAnalysis3d
 #' @author Alcinei Mistico Azevedo: <alcineimistico@@hotmail.com>
 #' @references
@@ -52,4 +54,5 @@
 #'
 #'  Hair, J.F. Multivariate Data Analysis.  (2016) 6ed. Pearson Prentice HalL.
 #'   (ISBN 13:978-0138132637)
+"_PACKAGE"
 NULL
